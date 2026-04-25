@@ -29,16 +29,13 @@ public class AlunoController {
 	
 	public void CadastrarAluno() {
 		
-		Aluno aluno = new Aluno();
-		
 		System.out.print("Nome: ");
-		aluno.setNome(sc.nextLine());
+		String nome = sc.next();
 		
 		System.out.print("Idade: ");
-		aluno.setIdade(Integer.parseInt(sc.nextLine()));
+		int idade = sc.nextInt();
 		
 		// Pega a maior matricula existente e soma 1
-		
 		int maiorMatricula = 0;
 		for (int i = 0; i < quantidadeAluno; i++) {
 			if (vetorAluno[i].getMatricula() > maiorMatricula) {
@@ -46,7 +43,52 @@ public class AlunoController {
 			}
 		}
 		
-		aluno.setMatricula(maiorMatricula + 1);
+		Aluno aluno = new Aluno(nome, idade, maiorMatricula + 1);
 		vetorAluno[quantidadeAluno++] = aluno;
+
+		System.out.println("Aluno cadastrado! Matricula: " + aluno.getMatricula());
+	}
+
+	public void ListarAluno() {
+
+		if (quantidadeAluno == 0) {
+			System.out.println("Sem alunos cadastrados.");
+			return;
+		}
+
+		for (int i = 0; i < quantidadeAluno; i++) {
+			System.out.println(vetorAluno[i].getMatricula() + " | " + vetorAluno[i].getNome() + " | " + vetorAluno[i].getIdade() + " anos");
+		}
+	}
+
+	// Busca aluno pelo nome ou matricula (LOGICA)
+	public Aluno BuscarAluno(String valor) {
+
+		for (int i = 0; i < quantidadeAluno; i++) {
+			boolean nomeIgual = vetorAluno[i].getNome().toLowerCase() == valor.toLowerCase();
+			boolean matriculaIgual = vetorAluno[i].getMatricula().toString().equals(valor);
+
+			if (nomeIgual || matriculaIgual) {
+				return vetorAluno[i];
+			}
+		}
+		return null;
+	}
+
+	// Busca aluno pelo nome ou matricula (SAIDA)
+	public Aluno PedirDadosAluno() {
+
+		Aluno aluno = null;
+		while (aluno == null) {
+			System.out.print("Nome ou matricula do aluno: ");
+			String valor = sc.next();
+
+			aluno = BuscarAluno(valor);
+
+			if (aluno == null) {
+				System.out.println("Aluno não encontrado, tente novamente.");
+			}
+		}
+		return aluno;
 	}
 }
