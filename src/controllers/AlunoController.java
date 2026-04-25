@@ -65,10 +65,11 @@ public class AlunoController {
 	public Aluno BuscarAluno(String valor) {
 
 		for (int i = 0; i < quantidadeAluno; i++) {
-			boolean nomeIgual = vetorAluno[i].getNome().toLowerCase() == valor.toLowerCase();
-			boolean matriculaIgual = vetorAluno[i].getMatricula().toString().equals(valor);
+			if (vetorAluno[i].getNome().toLowerCase().equals(valor.toLowerCase())) {
+				return vetorAluno[i];
+			}
 
-			if (nomeIgual || matriculaIgual) {
+			if (vetorAluno[i].getMatricula().toString().equals(valor)) {
 				return vetorAluno[i];
 			}
 		}
