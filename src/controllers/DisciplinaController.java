@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class DisciplinaController {
 
     private Disciplina[] vetorDisciplina;
-    private int quantidadeDisciplina;
+    private Integer quantidadeDisciplina;
 
     Scanner sc = new Scanner(System.in);
 
@@ -17,7 +17,7 @@ public class DisciplinaController {
         this.quantidadeDisciplina = quantidadeDisciplina;
     }
 
-    public int getQuantidadeDisciplina() {
+    public Integer getQuantidadeDisciplina() {
         return quantidadeDisciplina;
     }
 
